@@ -16,12 +16,15 @@ dataout = open('testcalendar.ical','w') # The file to write data
 numbevents = int(datain.readline(1)) #The number of events to make an ical for
 print (numbevents) 
 
+
+#Begining the writout of events
+starter = ('BEGIN:VCALENDAR\n'
+'VERSION:2.0\n'
+'PRODID:-//bobbin v0.1//NONSGML iCal Writer//EN\n'
+'CALSCALE:GREGORIAN\n'
+'METHOD:PUBLISH\n')
+
+dataout.write(starter)
+
 for i in range(0,numbevents):
-    
-
-
-
-test = icalformat.date()
-print (test)
-dataout.write(test)
     
