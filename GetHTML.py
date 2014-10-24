@@ -2,8 +2,6 @@ import mechanize
 from bs4 import BeautifulSoup
 import codecs
 
-USERNAME = "phuston"
-PASSWORD = "Felira45"
 
 def htmlHandle(USERNAME, PASSWORD):
 
@@ -14,13 +12,13 @@ def htmlHandle(USERNAME, PASSWORD):
 	br.select_form(nr=0)
 	br["userName"] = USERNAME
 	br["password"] = PASSWORD
-	results = str(br.submit().read())
+	html = str(br.submit().read())
 
-	html = open('testhtml.html','w')
-	html.write(results)
+	#html = open('testhtml.html','w')
+	#html.write(results)
 
 
-	soup = BeautifulSoup(open("testhtml.html",'r').read())
+	soup = BeautifulSoup(html)
 
 	tabulka = soup.find(id = "pg0_V_ggCourses")
 	tab = tabulka.find('tbody').findAll('tr')[0].findAll('td')[1].string
@@ -48,15 +46,15 @@ def htmlHandle(USERNAME, PASSWORD):
 	return [numOfCourses,courseNames,courseTimes,courseLocations]
 
 def formatInfo(numOfCourses,courseNames,courseTimes,courseLocations):
-	info = open('information.txt','w+')
-	info.write(numOfCourses + "\n")
+	info = ""
+	info += (numOfCourses + "\n")
 	for i in range(int(numOfCourses)):
-		info.write(courseNames[i]+"\n")
+		info += (courseNames[i]+"\n")
 		for j in range(len(courseTimes[i])):
-			info.write(str(courseTimes[i][j]) + "  ")
-		info.write("\n")
-		info.write(courseLocations[i] + "\n")
-
+			info += (str(courseTimes[i][j]) + "  ")
+		info += ("\n")
+		info += (courseLocations[i] + "\n")
+	return info
 
 htmlResults = htmlHandle(USERNAME,PASSWORD)
 
@@ -65,4 +63,5 @@ names = htmlResults[1]
 times = htmlResults[2]
 locs = htmlResults[3]
 
-formatInfo(num, names, times, locs)
+output = formatInfo(num, names, times, locs)
+print(output)
