@@ -1,8 +1,8 @@
 import sys
 import random
-import icalendar
 # Setting up the program for writing the calendar files
 datain = open('testdata.txt','r') # Grabbing the data
+import GetHTML
 
 # Storing all of the data into a list called data
 numbcourse = int(datain.readline(1))
@@ -14,22 +14,22 @@ for i in range(0,numbcourse* 3+1):
     tmp = tmp.replace('\n','')
     data[i] = tmp
 import pytz
-def SetEvent(course, time, location):
-    
-    timef = time.split(';',5)
-    locationf = location.split(';',5)
-
-    startevent = "BEGIN:VEVENT\n"
-    
-    cal = Calendar()
-    from datetime import datetime
-    cal.add('prodid','-//My calendar product//mxm.dk//')
-    cal.add('version','2.0')
-    
-    event = Event()
-    event.add('summary',course)
-    event.add('dstart',datetime(2014,
-    return event
+#def SetEvent(course, time, location):
+#    
+#    timef = time.split(';',5)
+#    locationf = location.split(';',5)
+#
+#    startevent = "BEGIN:VEVENT\n"
+#    
+#    cal = Calendar()
+#    from datetime import datetime
+#    cal.add('prodid','-//My calendar product//mxm.dk//')
+#    cal.add('version','2.0')
+#    
+#    event = Event()
+#    event.add('summary',course)
+#    event.add('dstart',datetime(2014,
+#    return event
 
 
 

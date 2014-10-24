@@ -2,6 +2,9 @@ import mechanize
 from bs4 import BeautifulSoup
 import codecs
 
+USERNAME = input("Enter Username:")
+PASSWORD = input("Enter Password:")
+
 
 def htmlHandle(USERNAME, PASSWORD):
 
@@ -10,6 +13,7 @@ def htmlHandle(USERNAME, PASSWORD):
 	br.open(url)
 
 	br.select_form(nr=0)
+
 	br["userName"] = USERNAME
 	br["password"] = PASSWORD
 	html = str(br.submit().read())
