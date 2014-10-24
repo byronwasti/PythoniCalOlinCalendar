@@ -1,9 +1,11 @@
 import mechanize
 from bs4 import BeautifulSoup
 import codecs
+import getpass
 
-USERNAME = input("Enter Username:")
-PASSWORD = input("Enter Password:")
+USERNAME = str(raw_input("Enter Username:"))
+PASSWORD = getpass.getpass('Password:')
+
 
 
 def htmlHandle(USERNAME, PASSWORD):
