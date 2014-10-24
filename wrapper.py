@@ -48,5 +48,3 @@ for i in range(0,numbcourse ):
     SetEvent(data[1+3*i],data[2+3*i],data[3+3*i])
 
 dataout.write(starter)
-
-   
