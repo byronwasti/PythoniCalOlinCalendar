@@ -23,7 +23,7 @@ def iCalCreator (email, ical):
 	msg['Subject'] = subject
 
 	# Write the body of the message
-	body = 'Hello Student! \n    Thank you for using iCalCreator! Your schedule is attached! Have a great year! \n\nEnjoy! \n--iCalCreator Creators <3'
+	body = 'Hello Student! \n    Thank you for using iCalCreator! Your schedule is attached! Have a great year! \n\nEnjoy! \n--iCalCreator Creators <3 \n (Byron Wasti, Keenan Zucker, Patrick Huston) \n \n \nPlease report any bugs to: \nbyron.wasti@students.olin.edu or keenan.zucker@students.olin.edu or patrick.huston@students.olin.edu'
 
 	#attaches the multiparts to the file
 	msg.attach(MIMEText(body))

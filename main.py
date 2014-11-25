@@ -2,6 +2,6 @@
 import Formatter
 import Emailer
 
-email = str(raw_input("Enter Email Account"))
+email = str(raw_input("Enter Email Account: "))
 ical = open('OliniCalendar.ics','r')
 Emailer.iCalCreator(email, ical)

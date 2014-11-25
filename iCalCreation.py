@@ -1,5 +1,6 @@
 #This is what will actually create the iCalendar
 import Formatter
+import Emailer
 import random
 ical = open('OliniCalendar.ics','w')
 
@@ -50,7 +51,7 @@ for j in range(7):
 
 
 # Look at me commenting code. I wonder what this string is....
-yearmonth = '201401'
+yearmonth = '201501'
 
 # Initializing the .ics file with the header stuff
 ical.write('BEGIN:VCALENDAR\nPRODID:-//Olin iCalCreation//Python//EN\nVERSION:2.0\n')
@@ -67,7 +68,7 @@ for i in range(len(times)):
             ical.write('DTSTART:' + yearmonth + day +'T' + times[i][1] +'00\n')
             ical.write('DTEND:' + yearmonth + day + 'T' + times[i][2] + '00\n')
             ical.write('SUMMARY:' + dnames[i] + '\n')
-            ical.write('RRULE:FREQ=WEEKLY')
+            ical.write('RRULE:FREQ=WEEKLY\n')
             ical.write('END:VEVENT\n')
 
 
@@ -75,6 +76,9 @@ for i in range(len(times)):
 # Ending up the ical file with all the business of ending an .ics file.
 ical.write('END:VCALENDAR')
 
+email = str(raw_input("Enter Email Account: "))
+ical = open('OliniCalendar.ics','r')
+Emailer.iCalCreator(email,ical)
 
 ''' THIS IS WHAT NEEDS TO BE DONE
 
