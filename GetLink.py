@@ -29,7 +29,20 @@ def htmlHandle(USERNAME, PASSWORD):
     html = driver.page_source
 
     soup = BeautifulSoup(html)
-    return html
+    tabulka = soup.find(id = "pg0_V_ggCourses")
+    tab = tabulka.find('tbody').findAll('tr')[0].findAll('td')[1].string
+    
+    Data = []
+
+    for row in tabulka.find('tbody').findAll('tr'):
+        times = []
+        course = str(row.findAll('td')[1].string.strip())
+        for li in row.findAll('td')[2].findAll('li'):
+            times.append(str(li.string.strip()).replace("\r\n\t\t\t\t\t\t\t\t\t\t"," "))
+        Data.append(course)
+        Data.append(times)
+
+    return Data
 
 testfile =open('html.txt','w')
 
