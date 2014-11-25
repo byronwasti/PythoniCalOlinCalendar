@@ -22,8 +22,10 @@ times = [['F -10:50AM - 12:30 PM', 'T -3:20 - 5:00 PM'], ['-0:00 - 0:00 AM'], ['
 
 locs = ['Location feature not yet implemented', 'Location feature not yet implemented', 'Location feature not yet implemented', 'Location feature not yet implemented', 'Location feature not yet implemented', 'Location feature not yet implemented', 'Location feature not yet implemented']
 
-# Starting the actual code
+#Starting some jank-ass code in order to have classes on multiple days. 
+timesold = times
 
+# Starting the actual code
 def formatTimes(t):
     time = []
     for i in range(len(t)):
