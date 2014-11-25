@@ -2,18 +2,24 @@ import mechanize
 from bs4 import BeautifulSoup
 import codecs
 import getpass
+driver = webdriver.Firefox()
 
 def htmlHandle(USERNAME, PASSWORD):
 
 	url = 'https://my.olin.edu/ICS/My_StAR/My_Schedule_and_Registration_Info.jnz'
+
+    viewdetails = "pg0_V_lnkView"
 	br = mechanize.Browser()
 	br.open(url)
 
 	br.select_form(nr=0)
+    
 
 	br["userName"] = USERNAME
 	br["password"] = PASSWORD
 	html = str(br.submit().read())
+    driver.find_element_by_id(viewdetails).click()
+    html = driver.page_source
 
 	soup = BeautifulSoup(html)
 
