@@ -69,10 +69,5 @@ names = htmlResults[1]
 times = htmlResults[2]
 locs = htmlResults[3]
 
-print(num)
-print(names)
-print(times)
-print(locs)
-
 #output = formatInfo(num, names, times, locs)
 #print(output)
