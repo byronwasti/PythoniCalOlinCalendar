@@ -37,7 +37,8 @@ def formatTimes(t):
                         date = tmp[0][tmp[0].find(l)]
                         day.append(tmp[0][tmp[0].find(l)])
                         tmp[0] = tmp[0].replace(date,'')
-                tmp[0] = int(tmp[0])
+                if len(tmp[0]) < 4:
+                    tmp[0] = '0' + tmp[0]
 
             else:
                 tmp[0] = tmp[0].replace('PM','')
@@ -49,18 +50,22 @@ def formatTimes(t):
                         tmp[0] = tmp[0].replace(date,'')
                 tmp[0] = int(tmp[0])
                 if tmp[0] < 1100: tmp[0] = tmp[0] + 1200
+                tmp[0] = str(tmp[0])
 
 
 
             # Fixing up the 2nd time values to be in 24 hr format and stripping of all other stuff
             if 'AM' in tmp[1]:
                 tmp[1] = tmp[1].replace('AM','')
-                tmp[1] = int(tmp[1])
+                if len(tmp[1]) < 4: tmp[1] = '0' + tmp[1]
+                
             else:
                 tmp[1] = tmp[1].replace('PM','')
                 tmp[1] = int(tmp[1])
                 if tmp[1] < 1100:
                     tmp[1] = tmp[1] + 1200
+                tmp[1] = str(tmp[1])
+            
 
             #print tmp
             #print day
@@ -68,7 +73,7 @@ def formatTimes(t):
             time.append(timetmp)
     return time
 
-formatTimes(times)
+print formatTimes(times)
 
 
 # No longer single commented out lines, I believe this is the implementation of the iCal code
