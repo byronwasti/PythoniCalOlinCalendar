@@ -4,6 +4,7 @@ import GetHTML
 import Formatter
 import iCalCreation
 import Emailer
+import os
 
 filename = 'OliniCalendar.ics'
 
@@ -50,3 +51,4 @@ iCalCreation.iCalWrite(times, yearmonth, endyearmonthdaytime, sdates, dnames, fi
 ical = open('OliniCalendar.ics','r')
 Emailer.iCalCreator(email,ical)
 
+os.remove('OliniCalendar.ics')
