@@ -6,6 +6,11 @@ import codecs
 import getpass
 driver = webdriver.Firefox()
 
+USERNAME = str(raw_input("username: "))
+PASSWORD = getpass.getpass("password: ")
+
+
+
 def htmlHandle(USERNAME, PASSWORD):
 
     url = 'https://my.olin.edu/ICS/My_StAR/My_Schedule_and_Registration_Info.jnz'
@@ -24,9 +29,9 @@ def htmlHandle(USERNAME, PASSWORD):
     html = driver.page_source
 
     soup = BeautifulSoup(html)
-    return soup
+    return html
 
 testfile =open('html.txt','w')
 
-testfile.write(htmlHandle('bwasti','Night123!'))
+testfile.write(htmlHandle(USERNAME,PASSWORD))
 
