@@ -15,10 +15,6 @@ def htmlHandle(USERNAME, PASSWORD):
 	br["password"] = PASSWORD
 	html = str(br.submit().read())
 
-	#html = open('testhtml.html','w')
-	#html.write(results)
-
-
 	soup = BeautifulSoup(html)
 
 	tabulka = soup.find(id = "pg0_V_ggCourses")
