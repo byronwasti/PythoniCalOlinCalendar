@@ -32,7 +32,7 @@ def iCalCreator (email, ical):
 	part = MIMEBase('application', "octet-stream")
 	part.set_payload(ical.read())
 	Encoders.encode_base64(part)
-	part.add_header('Content-Disposition', 'attachment; filename="iCalSchedule.txt"')
+	part.add_header('Content-Disposition', 'attachment; filename="iCalSchedule.ics"')
 	msg.attach(part)
 
 	# Gmail Login
@@ -46,5 +46,7 @@ def iCalCreator (email, ical):
 	server.sendmail(fromaddr, toaddrs, msg.as_string())
 	server.quit()
 
-test = open('test.txt','r')
-iCalCreator('keenanzucker@gmail.com', test)
+#test = open('OliniCalendar.ics','r')
+
+#email = str(raw_input("Enter Email account"))
+#iCalCreator(email, test)
