@@ -3,9 +3,15 @@ import random
 import pytz
 # Setting up the program for writing the calendar files
 
-#import GetHTML
+# Uncomment this section and comment the next section in order to switch to real mode
+'''
+import GetHTML
+num = GetHTML.num
+names = GetHTML.names
+times = GetHTML.times
+locs = GetHTML.locs
 
-
+'''
 # Setting up variables for testing purposes, uncomment import GetHTML in order to read real values
 
 num = 7
@@ -15,6 +21,8 @@ names = ['The Wired Ensemble -Instruments, Voices, Players', 'Do Machine Learnin
 times = [['F -10:50AM - 12:30 PM', 'T -3:20 - 5:00 PM'], ['-0:00 - 0:00 AM'], ['R -1:00 - 3:10 PM', 'M -1:30 - 3:10 PM'], ['MW -3:20 - 6:00 PM'], ['MR -10:50AM - 12:30 PM'], ['R -3:20 - 5:00 PM'], ['W -9:00 - 10:40 AM', 'W -9:00 - 10:40 AM']]
 
 locs = ['Location feature not yet implemented', 'Location feature not yet implemented', 'Location feature not yet implemented', 'Location feature not yet implemented', 'Location feature not yet implemented', 'Location feature not yet implemented', 'Location feature not yet implemented']
+
+# Starting the actual code
 
 def formatTimes(t):
     time = []
@@ -73,7 +81,7 @@ def formatTimes(t):
             time.append(timetmp)
     return time
 
-print formatTimes(times)
+times = formatTimes(times)
 
 
 # No longer single commented out lines, I believe this is the implementation of the iCal code
