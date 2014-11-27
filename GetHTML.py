@@ -3,6 +3,11 @@ from bs4 import BeautifulSoup
 import codecs
 import getpass
 
+# If we want to keep Mechanize, we have to figure out how to run this HTML code
+# __doPostBack('pg0$V$lnkView','')
+# This will do the same thing as clicking the javascript button
+
+
 USERNAME = str(raw_input("username: "))
 PASSWORD = getpass.getpass("password:  ")
 
@@ -19,7 +24,9 @@ def htmlHandle(USERNAME, PASSWORD):
 
 	br["userName"] = USERNAME
 	br["password"] = PASSWORD
-	html = str(br.submit().read())
+
+
+	html = str(br.submit("__doPostBack('pg0$V$lnkView','')").read())
 
 	soup = BeautifulSoup(html)
 
