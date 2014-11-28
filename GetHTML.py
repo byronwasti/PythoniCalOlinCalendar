@@ -1,5 +1,6 @@
 import mechanize
 from bs4 import BeautifulSoup
+import urllib
 import codecs
 import getpass
 
@@ -14,55 +15,61 @@ PASSWORD = getpass.getpass("password:  ")
 
 def htmlHandle(USERNAME, PASSWORD):
 
-	url = 'https://my.olin.edu/ICS/My_StAR/My_Schedule_and_Registration_Info.jnz'
+    url = 'https://my.olin.edu/ICS/My_StAR/My_Schedule_and_Registration_Info.jnz'
 
-	br = mechanize.Browser()
-	br.open(url)
+    br = mechanize.Browser()
+    br.open(url)
 
-	br.select_form(nr=0)
+    br.select_form(nr=0)
     
 
-	br["userName"] = USERNAME
-	br["password"] = PASSWORD
+    br["userName"] = USERNAME
+    br["password"] = PASSWORD
 
 
-	html = str(br.submit("__doPostBack('pg0$V$lnkView','')").read())
+    html = str(br.submit().read())
 
-	soup = BeautifulSoup(html)
+    br.select_form("MAINFORM")
 
-	tabulka = soup.find(id = "pg0_V_ggCourses")
-	tab = tabulka.find('tbody').findAll('tr')[0].findAll('td')[1].string
+    br['__EVENTTARGET'] = 'pg0$V$lnkView'
+    html = str(br.submit().read())
+    print html
 
-	courseNames = []
-	courseTimes = []
+    soup = BeautifulSoup(html)
 
-	for row in tabulka.find('tbody').findAll('tr'):
-		times = []
-		course = str(row.findAll('td')[1].string.strip())
-		for li in row.findAll('td')[2].findAll('li'):
-			times.append(str(li.string.strip()).replace("\r\n\t\t\t\t\t\t\t\t\t\t"," "))
+    tabulka = soup.find(id = "pg0_V_ggCourses")
+    tab = tabulka.find('tbody').findAll('tr')[0].findAll('td')[1].string
 
-		courseTimes.append(times)
-		courseNames.append(course)
+    courseNames = []
+    courseTimes = []
 
-	courseLocations = []
-	for i in range(len(courseNames)):
-		courseLocations.append("Location feature not yet implemented")
+    for row in tabulka.find('tbody').findAll('tr'):
+        times = []
+        course = str(row.findAll('td')[1].string.strip())
+        for li in row.findAll('td')[2].findAll('li'):
+            times.append(str(li.string.strip()).replace("\r\n\t\t\t\t\t\t\t\t\t\t"," "))
 
-	numOfCourses = str(len(courseNames))
+        courseTimes.append(times)
+        courseNames.append(course)
 
-	return [numOfCourses,courseNames,courseTimes,courseLocations]
+    courseLocations = []
+    for i in range(len(courseNames)):
+        courseLocations.append("Location feature not yet implemented")
+
+    numOfCourses = str(len(courseNames))
+
+    return [numOfCourses,courseNames,courseTimes,courseLocations]
 
 def formatInfo(numOfCourses,courseNames,courseTimes,courseLocations):
-	info = ""
-	info += (numOfCourses + "\n")
-	for i in range(int(numOfCourses)):
-		info += (courseNames[i]+"\n")
-		for j in range(len(courseTimes[i])):
-			info += (str(courseTimes[i][j]) + "  ")
-		info += ("\n")
-		info += (courseLocations[i] + "\n")
-	return info
+    info = ""
+    info += (numOfCourses + "\n")
+    for i in range(int(numOfCourses)):
+        info += (courseNames[i]+"\n")
+        for j in range(len(courseTimes[i])):
+            info += (str(courseTimes[i][j]) + "  ")
+        info += ("\n")
+        info += (courseLocations[i] + "\n")
+    return info
 
 htmlResults = htmlHandle(USERNAME,PASSWORD)
 
