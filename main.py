@@ -15,11 +15,15 @@ endyearmonthdaytime = '20150430T000000'
 
 
 
-USERNAME = str(raw_input("Enter my.olin.edu Username: "))
-PASSWORD = getpass.getpass('Password:  ')
+#USERNAME = str(raw_input("Enter my.olin.edu Username: "))
+#PASSWORD = getpass.getpass('Password:  ')
 email = str(raw_input("Email you want it sent to:  "))
 
-htmlResults = GetHTML.htmlHandle(USERNAME,PASSWORD)
+try:
+    htmlResults = GetHTML.htmlHandle(USERNAME,PASSWORD)
+    print "got results!"
+except:
+    print "Error exception"
 num = htmlResults[0]
 names = htmlResults[1]
 times = htmlResults[2]
@@ -41,7 +45,8 @@ for i in range(len(timesold)):
 dnames = {}
 
 k = 0
-for j in range(7):
+
+for j in range(len(snames)):
     for i in range(snames[names[j]]):
         dnames[k] = names[j]
         k += 1

@@ -5,6 +5,7 @@ import getpass
 
 def htmlHandle(USERNAME, PASSWORD):
 
+	'''
 	url = 'https://my.olin.edu/ICS/My_StAR/My_Schedule_and_Registration_Info.jnz'
 	br = mechanize.Browser()
 	br.open(url)
@@ -14,10 +15,22 @@ def htmlHandle(USERNAME, PASSWORD):
 	br["userName"] = USERNAME
 	br["password"] = PASSWORD
 	html = str(br.submit().read())
+	'''
+	try:
+		html = open(HTML.html)
+		data = html.read()
+	except:
+		print "Failed to open form"
+	
+	try:
+		soup = BeautifulSoup(open("HTML.html"))
+	except:
+		print "Failed to parse file"
+	try:
+		tabulka = soup.find(id = "pg0_V_ggCourses")
+	except:
+		print "Failed to find anything in the file"
 
-	soup = BeautifulSoup(html)
-
-	tabulka = soup.find(id = "pg0_V_ggCourses")
 	tab = tabulka.find('tbody').findAll('tr')[0].findAll('td')[1].string
 
 	courseNames = []
